@@ -1,14 +1,14 @@
-## Apollo Queries for React Komposer
+## Apollo Query for React Komposer
 
 > For more information on React Komposer, see [here](https://github.com/kadirahq/react-komposer).
 
 ### Installation
 
 ```
-npm install --save react-komposer-queries mantra-core apollo-client
+npm install --save react-komposer-query react-komposer apollo-client
 ```
 
-> mantra-core and apollo-client are peerDependencies of react-komposer-redux
+> react-komposer and apollo-client are peerDependencies of react-komposer-redux
 
 ### Usage
 

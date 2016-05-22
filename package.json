@@ -1,15 +1,15 @@
 {
-  "name": "react-komposer-queries",
+  "name": "react-komposer-query",
   "version": "0.0.0",
-  "homepage": "https://github.com/sammkj/react-komposer-queries",
+  "homepage": "https://github.com/sammkj/react-komposer-query",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sammkj/react-komposer-queries.git"
+    "url": "https://github.com/sammkj/react-komposer-query.git"
   },
   "bugs": {
-    "url": "https://github.com/sammkj/react-komposer-queries/issues"
+    "url": "https://github.com/sammkj/react-komposer-query/issues"
   },
-  "description": "Use Apollo GraphQL Queries react-komposer",
+  "description": "Use Apollo GraphQL Query in React Komposer",
   "main": "index.js",
   "scripts": {
     "prepublish": ". ./.scripts/prepublish.sh",
@@ -33,6 +33,6 @@
   },
   "peerDependencies": {
     "apollo-client": "^0.3.9",
-    "mantra-core": "1.6.1"
+    "react-komposer": "^1.8.0"
   }
 }
