@@ -8,7 +8,7 @@
 npm install --save react-komposer-query react-komposer apollo-client
 ```
 
-> react-komposer and apollo-client are peerDependencies of react-komposer-redux
+> react-komposer and apollo-client are peerDependencies of react-komposer-query
 
 ### Usage
 
@@ -42,34 +42,38 @@ Here's an example of a Mantra container:
 
 ```
 import TodoList from '../../components/todo-list';
-import composeWithQueries from 'react-komposer-queries';
+import composeWithQuery from 'react-komposer-query';
 import { useDeps, composeAll } from 'mantra-core';
 
-const query = `
-  allTodos {
-    _id
-    todo
-    createdAt
-  }
-`;
+const options = {
+  query: `
+    query todos {
+      allTodos {
+        _id
+        todo
+        createdAt
+      }
+    }
+  `,
+};
 
 const dataMapper = ({
   data,
   errors,
 }) => {
   const {
-    allTodos,
+    todos,
   } = data;
 
   return {
-    todos: allTodos,
+    todos,
     errors,
   };
 };
 
 
 export default composeAll(
-  composeWithQueries(query, dataMapper),
+  composeWithQuery(options, dataMapper),
   useDeps()
 )(TodoList);
 
