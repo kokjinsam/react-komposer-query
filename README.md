@@ -19,13 +19,11 @@ import * as Collections from '../../lib/collections';
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/kadira:flow-router-ssr';
 import { Tracker } from 'meteor/tracker';
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import { configureGraphQLClient } from 'apollo-tools';
 
 export default function () {
-  const url = Meteor.absoluteUrl('graphql');
-  const networkInterface = createNetworkInterface(url);
-  const Client = new ApolloClient({
-    networkInterface,
+  const Client = configureGraphQLClient({
+    url: '/graphql',
   });
 
   return {
@@ -47,33 +45,36 @@ import { useDeps, composeAll } from 'mantra-core';
 
 const options = {
   query: `
-    query todos {
-      allTodos {
+    query todos($type: TodoType) {
+      allTodos(type: $type) {
         _id
         todo
         createdAt
       }
     }
   `,
+  variables: {
+    type: 'ACTIVE'
+  }
 };
 
-const dataMapper = ({
+const resultMapper = ({
   data,
   errors,
 }) => {
   const {
-    todos,
+    allTodos,
   } = data;
 
   return {
-    todos,
+    todos: allTodos,
     errors,
   };
 };
 
 
 export default composeAll(
-  composeWithQuery(options, dataMapper),
+  composeWithQuery(options, resultMapper),
   useDeps()
 )(TodoList);
 
