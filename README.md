@@ -36,13 +36,14 @@ export default function () {
 }
 ```
 
-Here's an example of a Mantra container:
+`composeWithQuery` takes two arguments, namely, optionsOrFn and resultMapper. Here's an example of a Mantra container:
 
 ```
 import TodoList from '../../components/todo-list';
 import composeWithQuery from 'react-komposer-query';
 import { useDeps, composeAll } from 'mantra-core';
 
+// either provide an options object like below:
 const options = {
   query: `
     query todos($type: TodoType) {
@@ -56,6 +57,25 @@ const options = {
   variables: {
     type: 'ACTIVE'
   }
+};
+
+// or an options function that return an options object:
+const options = (context) {
+  console.log(context);
+  return {
+    query: `
+      query todos($type: TodoType) {
+        allTodos(type: $type) {
+          _id
+          todo
+          createdAt
+        }
+      }
+    `,
+    variables: {
+      type: 'ACTIVE'
+    }
+  };
 };
 
 const resultMapper = ({
